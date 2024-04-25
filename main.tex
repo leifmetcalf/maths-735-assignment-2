@@ -11,13 +11,14 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
-\newcommand{\Q}{\mathbb{Q}}
 \newcommand{\half}{\sfrac{1\!}2}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\interior}{int}
 \DeclareMathOperator{\closure}{cl}
 \DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\trace}{Tr}
+\DeclareMathOperator{\Endo}{End}
 
 \DeclareFontFamily{U}{mathb}{\hyphenchar\font45}
 \DeclareFontShape{U}{mathb}{m}{n}{
@@ -36,6 +37,196 @@
 \begin{enumerate}
 
 \item \begin{enumerate}
+
+\item Let \(\psi\colon V\to U\) be an orientation-reversing change of variables and \(\tilde f=f\circ\psi\). Then \(\tilde f_{v^k}=\sum_if_{u^i}\partial u^i/\partial v^k\) which implies
+\[\tilde f_{v^1}\times\tilde f_{v^2}=(f_{u^1}\times f_{u^2})\det\left(\frac{\partial u^i}{\partial v^k}\right).\]
+Here the orientation-reversing case differs from the orientation-preserving case. We have \(\tilde n=-n\circ \psi\) since \(\det d\psi<0\). Thus for \(X,Y\in T_u\tilde f\) we have
+\[\widetilde{II}_v(X,Y)=-d\tilde n\circ d\tilde f^{-1}(X)\cdot Y=dn\circ df^{-1}(X)\cdot Y=-II_{\psi(v)}(X,Y)\]
+and for \(\tilde X,\tilde Y\in T_v\R^2\) we have
+\[\widetilde{II}_v(\tilde X,\tilde Y)=dn\circ d\psi\,\tilde X\cdot df\circ d\psi\,\tilde Y=-II_{\psi(v)}(d\psi\,\tilde X,d\psi\,\tilde Y).\]
+
+\item Let \(f\colon U\to\R^3\) be a surface and \(X\in T_uf\) a principal direction with associated principal curvature \(\kappa=\kappa(X)\). Let \(K(u)\) and \(H(u)\) be the Gauss and mean curvatures respectively. Let \(B\colon \R^3\to\R^3\) be an orientation-reversing isometry. Then \(\tilde f=B\circ f\) is also a surface and \(\tilde n(u)=-dB\,n(u)\). Therefore
+\[-d\tilde n\circ d\tilde f^{-1}\,\tilde X=dB\circ dn\circ df^{-1}\,X=-\kappa\,dB\,X.\]
+This means \(\tilde X=dB\,X\) is a principal direction with principal curvature \(\tilde\kappa=-\kappa\). So \(\tilde K(u)=K(u)\) and \(\tilde H(u)=-H(u)\).
+
+\item Let \(f\), \(X\), \(\kappa\), \(K(u)\) and \(H(u)\) be as above. Let \(\psi\colon V\to U\) be an orientation-reversing change of variables. Then \(\tilde f=f\circ\psi\) is a surface. We have \(\tilde n(v)=-n\circ\psi(v)\) so
+\[-d\tilde n\circ d\tilde f^{-1}\,\tilde X=dn\circ df^{-1}\,X=-\kappa X.\]
+This means \(\tilde X=X\) is a principal direction with principal curvature \(\tilde\kappa=-\kappa\). So \(\tilde K(u)=K(u)\) and \(\tilde H(u)=-H(u)\).
+
+\end{enumerate}
+
+\item Let \(U\subset\R^2\) be an open set and \(f\colon U\to\R^3\) a smooth map given by
+\[f(u^1,u^2)\coloneqq(\ell(u^1)\cos u^2,\ell(u^1)\sin u^2,k(u^1))\]
+where \(\ell\) and \(k\) are smooth functions. \(f\) is an immersed surface when its derivative is injective at every point in \(U\). The derivative matrix of \(f\) is
+\[\begin{pmatrix}
+\ell'(u^1)\cos u^2&-\ell(u^1)\sin u^2\\
+\ell'(u^1)\sin u^2&\ell(u^1)\cos u^2\\
+k'(u^1)&0
+\end{pmatrix}\]
+and the determinants of the rank-2 minors of the derivative matrix are
+\begin{gather*}
+\ell'(u^1)\ell(u^1)\\
+k'(u^1)\ell(u^1)\sin u^2\\
+-k'(u^1)\ell(u^1)\cos u^2.
+\end{gather*}
+\(f\) is an immersed surface precisely when for any \(u_1\) and \(u_2\) at least one of these determinants is non-zero. This is equivalent to the condition
+\[\text{For all \((u^1,u^2)\in U\):}\quad\ell(u^1)\neq0\text{ and }\ell'(u^1)^2+k'(u^1)^2>0.\]
+
+\begin{enumerate}
+
+\item The standard matrix representation of the first fundamental form is
+\[\begin{pmatrix}
+\ell'(u^1)^2+k'(u^1)^2&0\\
+0&\ell(u^1)^2
+\end{pmatrix}\]
+
+\item We have
+\begin{align*}
+n(u^1,v^1)&=\frac{f_{u^1}\times f_{u^2}}{\abs{f_{u^1}\times f_{u^2}}}\\
+&=\frac{1}{\abs{\ell(u^1)}\sqrt{\ell'(u^1)^2+k'(u^1)^2}}\begin{pmatrix}
+-k'(u^1)\ell(u^1)\cos u^2\\
+-k'(u^1)\ell(u^1)\sin u^2\\
+\ell'(u^1)\ell(u^1)
+\end{pmatrix}\\
+&=\frac{\sgn\ell(u^1)}{\sqrt{\ell'(u^1)^2+k'(u^1)^2}}\begin{pmatrix}
+-k'(u^1)\cos u^2\\
+-k'(u^1)\sin u^2\\
+\ell'(u^1)
+\end{pmatrix}
+\end{align*}
+since \(\ell(u^1)\neq0\) and \(\ell'(u^1)^2+k'(u^1)^2>0\). Then the matrix form of \(dn\) is
+\[\frac{\sgn\ell(u^1)}{\sqrt{\ell'(u^1)^2+k'(u^1)^2}}\begin{pmatrix}
+-k''(u^1)\cos u^2&k'(u^1)\sin u^2\\
+-k''(u^1)\sin u^2&-k'(u^1)\cos u^2\\
+\ell''(u^1)&0
+\end{pmatrix}
++(\alpha n,\beta n).
+\]
+Note the second term is orthogonal to the surface so the standard matrix representation of the second fundamental form is
+\[\frac{\sgn\ell(u^1)}{\sqrt{\ell'(u^1)^2+k'(u^1)^2}}\begin{pmatrix}
+\ell'(u^1)k''(u^1)-\ell''(u^1)k'(u^1)&0\\
+0&\ell(u^1)k'(u^1)
+\end{pmatrix}.
+\]
+
+\item The matrix representation of the Weingarten map is
+\[(a^k_i)=\left(\sum_{j}h_{ij}g^{jk}\right)\]
+where \((g^{ik})\) is the inverse of \((g_{ik})\). The inverse of the first fundamental form matrix is
+\[\begin{pmatrix}
+(\ell'(u^1)^2+k'(u^1)^2)^{-1}&0\\
+0&\ell(u^1)^{-2}
+\end{pmatrix}\]
+so the matrix representation of the Weingarten map is
+\[\frac{\sgn\ell(u^1)}{\sqrt{\ell'(u^1)^2+k'(u^1)^2}}\begin{pmatrix}
+\frac{k''(u^1)\ell'(u^1)-k'(u^1)\ell''(u^1)}{\ell'(u^1)^2+k'(u^1)^2}&0\\
+0&\frac{k'(u^1)}{\ell(u^1)}
+\end{pmatrix}\]
+
+\item The Gauss curvature is
+\begin{align*}
+K(u)&=\det L\\
+&=\left(\frac{\sgn\ell(u^1)}{\sqrt{\ell'(u^1)^2+k'(u^1)^2}}\right)^2
+\cdot\frac{k''(u^1)\ell'(u^1)-k'(u^1)\ell''(u^1)}{\ell'(u^1)^2+k'(u^1)^2}\cdot
+\frac{k'(u^1)}{\ell(u^1)}\\
+&=\frac{k'(u^1)(k''(u^1)\ell'(u^1)-k'(u^1)\ell''(u^1))}{\ell(u^1)(\ell'(u^1)^2+k'(u^1)^2)^2}
+\end{align*}
+
+\item The mean curvature is
+\begin{align*}
+H(u)&=\frac12\trace L\\
+&=\frac{\sgn\ell(u^1)}{2\sqrt{\ell'(u^1)^2+k'(u^1)^2}}\left(
+\frac{k''(u^1)\ell'(u^1)-k'(u^1)\ell''(u^1)}{\ell'(u^1)^2+k'(u^1)^2}+
+\frac{k'(u^1)}{\ell(u^1)}\right)
+\end{align*}
+
+\end{enumerate}
+
+\item Let \(A\colon V\to V\) and \(B\colon V\to V\) be linear transformations on a finite-dimensional vector space \(V\) with dimension \(n\). Let \((a_{ij})_{1\leq i,j\leq n}\) and \((b_{ij})_{1\leq i,j\leq n}\) be the canonical matrix representations of \(A\) and \(B\). Then
+\[\trace(AB)=\sum_{i=1}^n\sum_{j=1}^na_{ij}b_{ji}=\sum_{j=1}^n\sum_{i=1}^nb_{ji}a_{ij}=\trace(BA)\]
+
+\item \begin{enumerate}
+
+\item Let \(V\) be a 3-dimensional vector space over \(\R\). Let \(\Lambda^3V^*\) be the space of completely skew trilinear forms on \(V\). Let \(\omega\in\Lambda^3V^*\). Note that \(\omega\) is unaffected by even permutations of its arguments and negated by odd permutations of its arguments. Let \(u,v,w\in V\) be a basis for \(V\). Note
+\begin{align*}
+&\omega(u,v,w)=\omega(v,w,u)=\omega(w,u,v)\\
+{}={}&-\omega(u,w,v)=-\omega(v,u,w)=-\omega(w,v,u)
+\end{align*}
+and the other values of \(\omega\) on basis vectors are all zero since
+\[\omega(u,u,v)=-\omega(u,u,v)\]
+and similar for every other combination of basis vectors containing a duplicate. Let \(r=au+bv+cw,s=du+ev+fw,t=gu+hv+iw\) be three vectors in \(V\). Since \(\omega\) is linear in its first argument and we can cycle the positions of its arguments according to the equalities above we can decompose \(\omega(r,s,t)\) into a linear combination of \(\omega\) applied to triples of basis vectors. By the equalities above these are all equal to 0 or \(\lambda\coloneqq\omega(u,v,w)\) and hence
+\begin{align*}
+&\omega(au+bv+cw,du+ev+fw,gu+hv+iw)\\
+&=aei\lambda+bfg\lambda+cdh\lambda-afh\lambda-bdi\lambda-ceg\lambda\\
+&=\det(r,s,t)\,\omega(u,v,w).
+\end{align*}
+Therefore \(\Lambda^3V^*\) has dimension at most 1. It has dimension exactly 1 since
+\[\chi(r,s,t)\coloneqq\det(r,s,t)\]
+is a completely skew non-zero trilinear form.
+
+\item Let \(L\in\Endo(V)\) and \(\omega\neq0\in\Lambda^3V^*\). Let \(\alpha\in\R\) and \(u,v,w,x\in V\). Then
+\begin{align*}
+\omega_L(u+v,w,x)&=\omega(L(\alpha u+v),Lw,Lx)\\
+&=\omega(\alpha Lu+Lv,Lw,Lx)\\
+&=\alpha\omega(Lu,Lw,Lx)+\omega(Lv,Lw,Lx)\\
+&=\alpha\omega_L(u,w,x)+\omega_L(v,w,x)
+\end{align*}
+so \(\omega_L\) is linear in its first argument and since we can rotate arguments freely \(\omega_L\) is trilinear.
+Let \(u,v,w\) be a basis for \(V\). Let \(A\) be the matrix representation of \(L\). Then
+\begin{align*}
+\omega_L(v_1,v_2,v_3)&=\omega(Lv_1,Lv_2,Lv_3)\\
+&=\omega(Av_1,Av_2,Av_3)\\
+&=\det(Av_1,Av_2,Av_3)\,\omega(u,v,w)\\
+&=\det A\cdot\det(v_1,v_2,v_3)\,\omega(u,v,w)\\
+&=\det A\cdot w(v_1,v_2,v_3)
+\end{align*}
+so \(\omega_L=\det A\cdot\omega\).
+
+\item The choice of a basis above was arbitrary, and since \(\omega\neq0\) this implies the \(\abs{L}\) defined is a constant determined solely by \(L\).
+
+\item Let \(L,M\in\Endo{V}\). Let \(\omega\neq0\in\Lambda^3V^*\). Then
+\[\abs{LM}\omega=\omega_{LM}=\abs L\omega_M=\abs L\abs M\omega.\]
+
+\item Let \(\omega\) be a non-zero completely skew trilinear for on \(V\). Define
+\[\omega_L(v_1,v_2,v_3)\coloneqq\omega(Lv_1,v_2,v_3)+\omega(v_1,Lv_2,v_3)+\omega(v_1,v_2,Lv_3).\]
+Then \(\omega\) is a completely skew trilinear form on \(V\). Since \(\dim\Lambda^3V^*=1\) we have for any \(L\in\Endo V\) a unique \(\abs{L}_1\) such that
+\[\omega_L=\abs{L}_1\omega.\]
+
+\item
+
+\item
+
+\end{enumerate}
+
+\item Let \(V\) be a 2-dimensional vector space over \(\R\). Let \(g\) be an inner product on \(V\). Let
+\[T(X,Y,Z,W)\coloneqq g(X,Y)g(Z,W)-g(X,W)g(Z,Y).\]
+\begin{enumerate}
+
+\item Note fixing \(X\) and \(Z\) gives an alternating 2-form \(T_{XZ}\). Let \(v_1,v_2\) be a basis for \(V\). Let \(\omega\) be the unique alternating 2-form on \(V\) satisfying \(\omega(v_1,v_2)=1\). Since \(\dim\Lambda^2V^*=1\), for any \(X,Z\in V\) there exists a \(\psi(X,Z)\) such that
+\[T_{XZ}=\psi(X,Z)\omega.\]
+Hence, for all \(X,Y,Z,W\in V\)
+\[T(X,Y,Z,W)=T_{XZ}(Y,W)=\psi(X,Z)\omega(Y,W).\]
+Note
+\[\psi(Z,X)\omega=T_{ZX}=-T_{XZ}=-\psi(X,Z)\omega\]
+and by a similar proof \(\psi\) is multilinear and hence \(\psi\in\Lambda^2V^*\). Since \(\dim\Lambda^2V^*=1\) there exists an \(\alpha\in\R\) such that \(\psi=\alpha\omega\). Plugging \(X,Z=v_1\) and \(Y,W=v_2\) into the definition of \(T\) gives
+\[g(v_1,v_1)g(v_2,v_2)-g(v_1,v_2)^2=T(v_1,v_1,v_2,v_2)=\alpha\omega(v_1,v_2)\omega(v_1,v_2)=\alpha\]
+which is positive by Cauchy--Schwartz so \(\alpha\) is positive and hence
+\[T(X,Y,Z,W)=\sqrt{\alpha}\omega(X,Z)\sqrt{\alpha}\omega(Y,W).\]
+
+\item Let \(A\) be a linear endomorphism. Let \(0\neq u,v\in V\). Then
+\begin{align*}
+T(Au,u,Av,v)&=g(Au,u)g(Av,v)-g(Au,v)g(Av,u)\\
+&=g(u,Au)g(v,Av)-g(v,A^\dag u)g(u,A^\dag v)\\
+&=g(A^\dag u,u)g(A^\dag v,v)-g(A^\dag u,v)g(A^\dag v,u)\\
+&=T(A^\dag u,u,A^\dag v,v)
+\end{align*}
+so
+\begin{gather*}
+\omega(Au,Av)\omega(u,v)=\omega(A^\dag u,A^\dag v)\omega(u,v)\\
+\abs{A}\omega(u,v)\omega(u,v)=\abs{A^\dag}\omega(u,v)\omega(u,v)\\
+\abs{A}=\abs{A^\dag}
+\end{gather*}
+
+\item
 
 \end{enumerate}
 
