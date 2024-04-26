@@ -186,14 +186,36 @@ so \(\omega_L=\det A\cdot\omega\).
 \item Let \(L,M\in\Endo{V}\). Let \(\omega\neq0\in\Lambda^3V^*\). Then
 \[\abs{LM}\omega=\omega_{LM}=\abs L\omega_M=\abs L\abs M\omega.\]
 
-\item Let \(\omega\) be a non-zero completely skew trilinear for on \(V\). Define
+\item Let \(\omega\) be a non-zero completely skew trilinear form on \(V\). Define
 \[\omega_L(v_1,v_2,v_3)\coloneqq\omega(Lv_1,v_2,v_3)+\omega(v_1,Lv_2,v_3)+\omega(v_1,v_2,Lv_3).\]
 Then \(\omega\) is a completely skew trilinear form on \(V\). Since \(\dim\Lambda^3V^*=1\) we have for any \(L\in\Endo V\) a unique \(\abs{L}_1\) such that
 \[\omega_L=\abs{L}_1\omega.\]
+Let \(L\) be a linear endomorphism on \(V\) with matrix representation \(A\). Let \(e_1,e_2,e_3\) be a basis for \(V\). Then
+\begin{align*}
+\omega_L(e_1,e_2,e_3)&=\omega(Le_1,e_2,e_3)+\omega(e_1,Le_2,e_3)+\omega(e_1,e_2,Le_3)\\
+&=\omega(Ae_1,e_2,e_3)+\omega(e_1,Ae_2,e_3)+\omega(e_1,e_2,Ae_3)
+\end{align*}
+By skew-symmetry only the \(\omega(e_1,e_2,e_3)\) are nonzero and hence
+\begin{align*}
+\omega_L(e_1,e_2,e_3)&=\omega(A_{11}e_1,e_2,e_3)+\omega(e_1,A_{22}e_2,e_3)+\omega(e_1,e_2,A_{33}e_3)\\
+&=(A_{11}+A_{22}+A_{33})\omega(e_1,e_2,e_3)\\
+&=\trace A\cdot\omega(e_1,e_2,e_3)
+\end{align*}
+so \(\abs{L}_1=\trace A\) and hence we have defined the trace in a basis-independent way.
 
-\item
+\item Let \(\omega\) be a non-zero completely skew trilinear form on \(V\). Define
+\[\omega_L(v_1,v_2,v_3)\coloneqq\omega(Lv_1,Lv_2,v_3)+\omega(v_1,Lv_2,Lv_3)+\omega(Lv_1,v_2,Lv_3).\]
+Then \(\omega\) is a completely skew trilinear form on \(V\). Since \(\dim\Lambda^3V^*=1\) we have for any \(L\in\Endo V\) a unique quadratic invariant \(\abs{L}_2\) such that
+\[\omega_L=\abs{L}_2\omega.\]
 
-\item
+\item If \(L\) is diagonalisable then there exists a basis of eigenvectors \(x_1,x_2,x_3\) for \(V\). Then
+\begin{align*}
+\omega_L(x_1,x_2,x_3)&=\omega(Lx_1,Lx_2,x_3)+\omega(x_1,Lx_2,Lx_3)+\omega(Lx_1,x_2,Lx_3)\\
+&=\omega(\lambda_1x_1,\lambda_2x_2,x_3)+\omega(x_1,\lambda_2x_2,\lambda_3x_3)+\omega(\lambda_1x_1,x_2,\lambda_3x_3)\\
+&=(\lambda_1\lambda_2+\lambda_2\lambda_3+\lambda_1\lambda_3)\omega(x_1,x_2,x_3)
+\end{align*}
+so
+\[\abs{L}_2=\lambda_1\lambda_2+\lambda_2\lambda_3+\lambda_1\lambda_3\]
 
 \end{enumerate}
 
@@ -226,7 +248,19 @@ so
 \abs{A}=\abs{A^\dag}
 \end{gather*}
 
-\item
+\item Let \(e_1,e_2\) be an orthonormal basis for \(V\). Let \(u=ae_1+be_2\) and \(v=ce_1+de_2\) be two vectors in \(V\).
+\begin{align*}
+g(Au,v)&=g(A(ae_1+be_2),ce_1+de_2)\\
+&=g(aA_{11}e_1+aA_{21}e_2+bA_{12}e_1+bA_{22}e_2,ce_1+de_2)\\
+&=(aA_{11}+bA_{12})c+(aA_{21}+bA_{22})d\\
+&=acA_{11}+bcA_{12}+adA_{21}+bdA_{22})\\
+&=acA_{11}+bcA_{21}+adA_{12}+bdA_{22})\\
+&=a(cA_{11}+dA_{12})+b(cA_{21}+dA_{22})\\
+&=g(ae_1+be_2,cA_{11}e_1+cA_{21}e_2+dA_{12}e_1+dA_{22}e_2)\\
+&=g(ae_1+be_2,A\tr(ce_1+de_2))\\
+&=g(u,A\tr v)
+\end{align*}
+so \(A\tr\) is the unique adjoint of \(A^\dag\)
 
 \end{enumerate}
 
